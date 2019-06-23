@@ -1,0 +1,33 @@
+CFLAGS = -g -pg -Wall -W -Wextra -O3
+server.out: group_name.o group_phone.o group_group.o red_black_tree_name.o red_black_tree_phone.o global_list.o strings.o command.o read.o recognize.o main.o network.o
+	g++ $(CFLAGS) group_name.o group_phone.o group_group.o red_black_tree_name.o red_black_tree_phone.o global_list.o main.o recognize.o strings.o command.o read.o network.o -o server.out
+
+group_name.o: group_name.cpp group_name.h record_list.h
+	g++ $(CFLAGS) -c group_name.cpp
+group_phone.o: group_phone.cpp group_phone.h record_list.h
+	g++ $(CFLAGS) -c group_phone.cpp
+group_group.o: group_group.cpp group_group.h record_node.h
+	g++ $(CFLAGS) -c group_group.cpp
+
+red_black_tree_name.o: red_black_tree_name.cpp red_black_tree.h record_node.h
+	g++ $(CFLAGS) -c red_black_tree_name.cpp
+red_black_tree_phone.o: red_black_tree_phone.cpp red_black_tree.h record_node.h
+	g++ $(CFLAGS) -c red_black_tree_phone.cpp
+global_list.o: global_list.cpp global_list.h record_node.h
+	g++ $(CFLAGS) -c global_list.cpp
+
+read.o: read.cpp read.h
+	g++ $(CFLAGS) -c read.cpp
+command.o: command.cpp command.h network.h
+	g++ $(CFLAGS) -c command.cpp
+strings.o: strings.cpp strings.h
+	g++ $(CFLAGS) -c strings.cpp
+
+network.o: network.cpp network.h
+	g++ $(CFLAGS) -c network.cpp
+recognize.o: recognize.cpp recognize.h command.h network.h
+	g++ $(CFLAGS) -c recognize.cpp
+main.o: main.cpp read.h network.h
+	g++ $(CFLAGS) -c main.cpp
+clean:
+	rm -f server.out leak.out* gmon* *.o

@@ -1,0 +1,5 @@
+select * where name = Student;
+select * where group = 208;
+select * where phone = 1234567;
+quit;
+

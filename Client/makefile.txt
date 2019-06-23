@@ -1,0 +1,10 @@
+CFLAGS = -g -pg -Wall -W -Wextra -O3
+client.out: main.o network.o
+	g++ $(CFLAGS) main.o network.o -o client.out
+
+network.o: network.cpp network.h
+	g++ $(CFLAGS) -c network.cpp
+main.o: main.cpp network.h
+	g++ $(CFLAGS) -c main.cpp
+clean:
+	rm -f client.out leak.out* gmon* *.o
